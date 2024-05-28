@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block titulo %} Detalle de asignatura {% endblock %}
+{% block contenido %}
+    <h2>Detalle de asignatura</h2>
+    {% if asignatura %}
+        <table>
+            <tr>
+                <th>Nombre de asignatura</th>
+                <th>Creditos</th>
+                <th>Ver estudiantes</th>
+                <th>Acciones</th>
+            </tr>
+            <tr>
+                <td>{{ asignatura.nombre }}</td>
+                <td>{{ asignatura.creditos }}</td>
+                <td><a href="{% url 'lista_estudiantes' asignatura.id %}">Ver estudiantes</a></td>
+                <td></td>
+            </tr>
+        </table>
+    {% else %}
+        <p>No hay asignaturas disponibles.</p>
+    {% endif %}
+{% endblock %}

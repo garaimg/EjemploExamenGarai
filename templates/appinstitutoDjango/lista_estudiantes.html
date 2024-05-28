@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block titulo %} Lista de Estudiantes {% endblock %}
+{% block contenido %}
+    <h2>{{ asignatura.nombre }}</h2>
+    <h2>Lista de Estudiantes de la Asignatura {{ asignatura.nombre }}</h2>
+    {% if estudiantes %}
+        <table>
+            <tr>
+                <th>Nombre de Estudiante</th>
+            </tr>
+            {% for estudiante in estudiantes %}
+                <tr>
+                    <td><a href="{% url 'detalle_estudiantes' estudiante.DNI %}">{{ estudiante.nombre }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No hay estudiantes para la asignatura.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block titulo %} Lista de Asignaturas {% endblock %}
+{% block contenido %}
+    <h2>Lista de Asignaturas</h2>
+    {% if asignaturas %}
+        <table>
+            <tr>
+                <th>Nombre de asignatura</th>
+            </tr>
+            {% for asignatura in asignaturas %}
+                <tr>
+                    <td><a href="{% url 'detalle_asignaturas' asignatura.id %}">{{ asignatura.nombre }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No hay asignaturas disponibles.</p>
+    {% endif %}
+{% endblock %}

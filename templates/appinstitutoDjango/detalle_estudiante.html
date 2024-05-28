@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block titulo %} Detalle de estudiante {% endblock %}
+{% block contenido %}
+    <h2>Detalle de Estudiante</h2>
+    {% if estudiante %}
+        <table>
+            <tr>
+                <th>DNI de Estudiante</th>
+                <th>Nombre del Estudiante</th>
+                <th>Apellido del Estudiante</th>
+                <th>Edad del Estudiante</th>
+                <th>Acciones</th>
+            </tr>
+            <tr>
+                <td>{{ estudiante.DNI }}</td>
+                <td>{{ estudiante.nombre }}</td>
+                <td>{{ estudiante.apellido }}</td>
+                <td>{{ estudiante.edad }}</td>
+                <td></td>
+            </tr>
+        </table>
+        {% if asignaturas %}
+            <h2>Asignaturas: </h2>
+            <ul>
+                {% for asignatura in asignaturas %}
+                    <li><a href="{% url 'detalle_asignaturas' asignatura.id %}">{{ asignatura.nombre }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No tiene asignaturas</p>
+        {% endif %}
+    {% else %}
+        <p>No hay estudiante.</p>
+    {% endif %}
+{% endblock %}
