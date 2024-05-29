@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block contenido %}
+    <h2>Editar Estudiante</h2>
+    <form action="{% url 'editar_estudiante' estudiante.DNI %}" method="post">
+        {% csrf_token %}
+        {{ formulario.errors }}
+        {{ formulario.as_ul }}
+        <input type="submit" value="Editar Estudiante"/>
+    </form>
+
+{% endblock %}

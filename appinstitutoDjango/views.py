@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 
 from appinstitutoDjango.forms import EstudianteForm, AsignaturaForm
 from appinstitutoDjango.models import Estudiante, Asignatura
@@ -75,3 +75,27 @@ class AsignaturaCreateView(View):
             return redirect('lista_asignaturas')
 
         return render(request, 'appinstitutoDjango/crear_asignatura.html', {'formulario': formulario})
+
+
+class EstudianteUpdateView(UpdateView):
+    model = Estudiante
+
+    def get(self, request, pk):
+        estudiante = Estudiante.objects.get(pk=pk)
+        formulario = EstudianteForm(instance=estudiante)
+        context = {
+            'formulario': formulario,
+            'estudiante': estudiante
+        }
+        return render(request, 'appinstitutoDjango/estudiante_update.html', context)
+
+    # Llamada para procesar la actualización del departamento
+    def post(self, request, pk):
+        estudiante = Estudiante.objects.get(pk=pk)
+        formulario = EstudianteForm(request.POST, instance=estudiante)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('detalle_estudiantes', estudiante.pk)
+        else:
+            formulario = EstudianteForm(instance=estudiante)
+        return render(request, 'appinstitutoDjango/estudiante_update.html', {'formulario': formulario})
