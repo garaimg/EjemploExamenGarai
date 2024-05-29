@@ -14,7 +14,8 @@
                 <td>{{ asignatura.nombre }}</td>
                 <td>{{ asignatura.creditos }}</td>
                 <td><a href="{% url 'lista_estudiantes' asignatura.id %}">Ver estudiantes</a></td>
-                <td></td>
+                <td><a href="{% url 'editar_asignatura' asignatura.pk %}">Actualizar Asignatura</a></td>
+                <td><a href="{% url 'eliminar_asignatura' asignatura.pk %}">Eliminar asignatura</a></td>
             </tr>
         </table>
     {% else %}

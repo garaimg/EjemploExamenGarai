@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block titulo %}Actualizar Asignatura{% endblock %}
+{% block contenido %}
+    <h2>Editar Asignatura</h2>
+    <form action="{% url 'editar_asignatura' asignatura.pk %}" method="post">
+        {% csrf_token %}
+        {{ formulario.errors }}
+        {{ formulario.as_ul }}
+        <input type="submit" value="Editar Asignatura">
+    </form>
+{% endblock %}

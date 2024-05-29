@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 
 from appinstitutoDjango.forms import EstudianteForm, AsignaturaForm
 from appinstitutoDjango.models import Estudiante, Asignatura
@@ -99,3 +100,40 @@ class EstudianteUpdateView(UpdateView):
         else:
             formulario = EstudianteForm(instance=estudiante)
         return render(request, 'appinstitutoDjango/estudiante_update.html', {'formulario': formulario})
+
+
+class AsignaturaUpdateView(UpdateView):
+    model = Asignatura
+
+    def get(self, request, pk):
+        asignatura = Asignatura.objects.get(id=pk)
+        formulario = AsignaturaForm(instance=asignatura)
+        context = {
+            'formulario': formulario,
+            'asignatura': asignatura
+        }
+        return render(request, 'appinstitutoDjango/asignatura_update.html', context)
+
+    def post(self, request, pk):
+        asignatura = Asignatura.objects.get(id=pk)
+        formulario = AsignaturaForm(request.POST, instance=asignatura)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('detalle_asignaturas', asignatura.pk)
+        else:
+            formulario = AsignaturaForm(instance=asignatura)
+        return render(request, 'appinstitutoDjango/asignatura_update.html', {'formulario': formulario})
+
+
+class EstudianteDeleteView(DeleteView):
+    model = Estudiante
+    success_url = reverse_lazy('lista_asignaturas')
+    template_name = 'appinstitutoDjango/eliminar_estudiante.html'
+    context_object_name = 'estudiante'
+
+
+class AsignaturaDeleteView(DeleteView):
+    model = Asignatura
+    success_url = reverse_lazy('lista_asignaturas')
+    template_name = 'appinstitutoDjango/eliminar_asignatura.html'
+    context_object_name = 'asignatura'

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block titulo %}Confirmar Eliminación del Estudiante{% endblock %}
+{% block contenido %}
+    <h2>¿Estás seguro de que deseas eliminar el Estudiante "{{ estudiante.nombre }}
+        - DNI: {{ estudiante.DNI }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar">
+    </form>
+{% endblock %}

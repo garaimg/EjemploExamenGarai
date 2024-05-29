@@ -17,7 +17,8 @@ Including another URLconf
 from django.urls import path
 
 from .views import AsignaturasListView, AsignaturaDetailView, EstudiantesListView, EstudianteDetailView, \
-    EstudianteCreateView, AsignaturaCreateView, EstudianteUpdateView
+    EstudianteCreateView, AsignaturaCreateView, EstudianteUpdateView, AsignaturaUpdateView, EstudianteDeleteView, \
+    AsignaturaDeleteView
 
 urlpatterns = [
     path('', AsignaturasListView.as_view(), name='lista_asignaturas'),
@@ -27,4 +28,7 @@ urlpatterns = [
     path('asignatura/create/', AsignaturaCreateView.as_view(), name='crear_asignatura'),
     path('estudiante/create/', EstudianteCreateView.as_view(), name='crear_estudiante'),
     path('estudiante/update/<str:pk>', EstudianteUpdateView.as_view(), name='editar_estudiante'),
+    path('asignatura/update/<int:pk>', AsignaturaUpdateView.as_view(), name='editar_asignatura'),
+    path('estudiante/delete/<str:pk>', EstudianteDeleteView.as_view(), name='eliminar_estudiante'),
+    path('asignatura/delete/<int:pk>', AsignaturaDeleteView.as_view(), name='eliminar_asignatura'),
 ]

@@ -17,6 +17,7 @@
                 <td>{{ estudiante.apellido }}</td>
                 <td>{{ estudiante.edad }}</td>
                 <td><a href="{% url 'editar_estudiante' estudiante.DNI %}">Actualizar estudiante</a></td>
+                <td><a href="{% url 'eliminar_estudiante' estudiante.DNI %}">Eliminar estudiante</a></td>
             </tr>
         </table>
         {% if asignaturas %}
